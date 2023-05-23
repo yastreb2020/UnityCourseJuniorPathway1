@@ -5,8 +5,8 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 offset = new Vector3(0, 5, -7);
-    private Vector3 offset2 = new Vector3(0, 3.3f, 1.8f);
+    [SerializeField] private Vector3 offset = new Vector3(0, 5, -7);
+    [SerializeField] private Vector3 offset2 = new Vector3(0, 3.3f, 1.8f);
     private float spaceInput;
     private float lastInput;
     private Vector3 currentOffset;
