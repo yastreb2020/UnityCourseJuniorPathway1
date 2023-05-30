@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     // private variables
-    //[SerializeField] private float speed = 10f;
+    private float speed;
     [SerializeField] private float horsePower;
     [SerializeField] private float turnSpeed = 30f;
     private float horizontalInput;
     private float forwardInput;
     private Rigidbody playerRb;
-    public GameObject centerOfMass;
+    [SerializeField] private GameObject centerOfMass;
+    [SerializeField] private TextMeshProUGUI speedometerText;
 
-    private void Start()
+    void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.centerOfMass = centerOfMass.transform.localPosition;
@@ -31,5 +33,8 @@ public class PlayerController : MonoBehaviour
         playerRb.AddRelativeForce(Vector3.forward * horsePower * forwardInput);
         // rotate the vehicle
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
+
+        speed = playerRb.velocity.magnitude * 3.6f; //kph, for mph use 2.237f
+        speedometerText.SetText("Speed: " + Mathf.RoundToInt(speed) + " km/h");
     }
 }
